@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  sudo: yes
-  sudo_user: isucon
   gather_facts: no
   tasks:
     - git:
@@ -14,6 +12,7 @@
         creates: /home/isucon/.local/ruby/bin/ruby
 
 - hosts: all
+  become: true
   gather_facts: no
   tasks:
     # java

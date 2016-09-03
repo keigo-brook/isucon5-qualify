@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  sudo: yes
-  sudo_user: isucon
   gather_facts: no
   tasks:
     - git:
@@ -40,6 +38,7 @@
     - file: src=/home/isucon/.local/scala-2.11.7 dest=/home/isucon/.local/scala state=link
 
 - hosts: all
+  become: true
   gather_facts: no
   tasks:
     # java

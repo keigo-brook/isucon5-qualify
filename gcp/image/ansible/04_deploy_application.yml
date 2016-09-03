@@ -1,8 +1,6 @@
 ---
 - hosts: all
   gather_facts: no
-  sudo: yes
-  sudo_user: isucon
   tasks:
     - git:
         repo=https://github.com/isucon/isucon5-qualify.git
@@ -16,10 +14,6 @@
       shell: PATH=/home/isucon/.local/ruby/bin:$PATH bundle install
       args:
         chdir: /home/isucon/webapp/ruby
-    - name: perl
-      shell: PATH=/home/isucon/.local/perl/bin:$PATH carton install
-      args:
-        chdir: /home/isucon/webapp/perl
     - name: php
       shell: PATH=/home/isucon/.local/php/bin:$PATH php composer.phar install
       args:
@@ -67,6 +61,7 @@
     # - command: sudo su - isucon /home/isucon/init.sh
 
 - hosts: all
+  become: true
   gather_facts: no
   tasks:
     - copy: src=../files/env.sh dest=/home/isucon/env.sh owner=isucon mode=644
